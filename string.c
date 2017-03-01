@@ -12,14 +12,15 @@ struct string *next;
 
 
 char  *get_string(void){
+
 string *preptr=malloc(sizeof(string));
 string *nextptr=NULL;
 if (preptr==NULL){return 1;}
 preptr->a=getchar();
 while (preptr->a != 10){
 if (first == NULL ){
-//first= preptr;
-preptr=first;
+first= preptr;
+//preptr=first;
 nextptr=malloc(sizeof(string));
 preptr->next=nextptr;
 }
@@ -32,16 +33,18 @@ nextptr->a=getchar();
 }
 nextptr->a='\0';//preptr->next=NULL;
 return first;
+
+}//end get string 
+
+void printS(string s){
 }
 
-
-
 int main(){
-string *c;
+string c;
 c=get_string();
-while (c->a !='\0'){
+//while (c->a !='\0'){
 printf("%c",*c);
-c=c->next;
+//c=c->next;
 }
 
 return 0;
