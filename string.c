@@ -1,51 +1,55 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char *first=NULL;
-
 typedef struct string{
-char a;
-struct string *next;
+	char a;
+	struct string *next;
 }string;
 
 
-
-
-char  *get_string(void){
-
-string *preptr=malloc(sizeof(string));
-string *nextptr=NULL;
-if (preptr==NULL){return 1;}
-preptr->a=getchar();
-while (preptr->a != 10){
-if (first == NULL ){
-first= preptr;
-//preptr=first;
-nextptr=malloc(sizeof(string));
-preptr->next=nextptr;
-}
-else {
-preptr=nextptr;
-nextptr==malloc(sizeof(string));
-preptr->next=nextptr;
-}
-nextptr->a=getchar();
-}
-nextptr->a='\0';//preptr->next=NULL;
-return first;
+string  get_string(void){
+	char c;
+	string *preptr=malloc(sizeof(string));//previos char
+	string *nextptr=NULL;//next char
+	string *first=NULL;
+	//if (preptr==NULL){return "E";}
+	c=getchar();
+	while (c != 10){
+		if (first == NULL ){
+			first= preptr;
+			preptr->a=c;
+			nextptr=malloc(sizeof(string));
+			preptr->next=nextptr;
+			c=getchar();
+		}//endif
+		else {
+			
+			preptr=nextptr;
+			preptr->a=c;
+			nextptr=malloc(sizeof(string));
+			preptr->next=nextptr;
+			c=getchar();
+		}//endelse
+	}//end while
+	nextptr->a='\0';
+	nextptr->next=NULL;
+	return *first;
 
 }//end get string 
 
-void printS(string s){
+void print_string(string s){
+
+while (s.a !='\0'){
+		printf("%c",s.a);
+		s=*(s.next);
+	}
+printf("\n");
 }
+
 
 int main(){
-string c;
-c=get_string();
-//while (c->a !='\0'){
-printf("%c",*c);
-//c=c->next;
-}
-
-return 0;
+	string s;
+	s=get_string();
+	print_string(s);
+	
 }
